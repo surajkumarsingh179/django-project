@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mt-4">
+            <div class="card-body p-4">
+                <h2 class="card-title mb-4">Create New Post</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <div class="text-danger small">{{ form.title.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.content.label_tag }}
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                            <div class="text-danger small">{{ form.content.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.image.label_tag }}
+                        <input type="file" name="{{ form.image.name }}" class="form-control" accept="image/*" id="{{ form.image.id_for_label }}">
+                        {% if form.image.errors %}
+                            <div class="text-danger small">{{ form.image.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-success">Publish Post</button>
+                    <a href="{% url 'home' %}" class="btn btn-secondary ms-2">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

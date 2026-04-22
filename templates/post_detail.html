@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <div class="card mt-4">
+            <div class="card-body p-5">
+                <h1 class="card-title mb-3">{{ post.title }}</h1>
+                <h6 class="card-subtitle mb-4 text-muted">
+                    Written by <strong>{{ post.author.username }}</strong> on {{ post.created_at|date:"F d, Y, P" }}
+                </h6>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid rounded mb-4" alt="{{ post.title }}" style="max-height: 500px; object-fit: cover; width: 100%;">
+                {% endif %}
+                <hr>
+                <div class="card-text mt-4" style="white-space: pre-wrap;">{{ post.content }}</div>
+                
+                <div class="mt-5">
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">&larr; Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
